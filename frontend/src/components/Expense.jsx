@@ -35,6 +35,9 @@ function Expense() {
             if(res.data.status==='success'){
                 window.location.href='/expense'
             }
+            else if(res.data.status==="Invalid data"){
+                alert(res.data.message)
+            }
         })
         .catch((err)=>{
             console.log(err)
