@@ -21,7 +21,7 @@ export default function Home() {
         e.preventDefault()
         var data = []
         data = [{
-            category: 'Enter Your Budget',
+            category: 'Budget',
             amount: e.target.budget.value
         }, {
             category: 'Food',
