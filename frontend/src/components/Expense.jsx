@@ -9,6 +9,7 @@ function Expense() {
 
     function Options(){
         return categories.map((cat) => {
+            // eslint-disable-next-line react/jsx-key
             return <option value={cat}>{cat}</option>
         })
     }

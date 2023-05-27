@@ -1,7 +1,7 @@
-import axios from "axios";
 import { Chart } from "react-google-charts";
 import React, { useEffect } from "react"
 import axios from "axios"
+import DrawerAppBar from "./Navbar";
 
 function Charte() {
     const [exp, setExp] = React.useState([])
@@ -39,6 +39,8 @@ function Charte() {
     }
 
     return (
+        <>
+            <DrawerAppBar />
         <Chart
             chartType="PieChart"
             data={data}
@@ -46,6 +48,8 @@ function Charte() {
             height="400px"
             legendToggle
         />
+        </>
+        
     )
 }
 

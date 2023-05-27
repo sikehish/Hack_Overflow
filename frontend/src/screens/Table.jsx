@@ -1,10 +1,16 @@
 import Expdis from "../components/Expdis"
 import Expense from "../components/Expense"
-function Table(){
-    return <div Style={{Display:"flex"}}>
-    <Expense/>
-    <Expdis/>
-    </div>
+import DrawerAppBar from "../components/Navbar"
+function Table() {
+    return (
+        <>
+            <DrawerAppBar />
+            <div style={{ "Display": "flex" }}>
+                <Expense />
+                <Expdis />
+            </div>
+        </>
+    )
 }
 
 export default Table
