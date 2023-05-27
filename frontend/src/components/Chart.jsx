@@ -1,9 +1,10 @@
 import axios from "axios";
 import { Chart } from "react-google-charts";
-import { useEffect,useState } from "react";
+import React, { useEffect } from "react"
+import axios from "axios"
 
 function Charte() {
-    const [exp, setExp] = useState([])
+
     useEffect(() => {
         axios.get('/api/expenses/analysis', {
             headers: {
@@ -13,18 +14,19 @@ function Charte() {
         })
             .then((res) => {
                 if(res.data.status==='success'){
-                console.log("hi",res.data.data[0].expenses)
-                setExp(res.data.data[0].expenses)
+                    console.log(res.data)
                 }
                 else{
                     console.log('res.data.message')
-                    window.location.href='/expdis'
+                    window.location.href='/chart'
                 }
             })
             .catch((err) => {
                 console.log(err)
             })
     }, [])
+
+
     return (
         <Chart
             chartType="PieChart"

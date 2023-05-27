@@ -1,92 +1,72 @@
-import DrawerAppBar from '../components/Navbar'
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
-import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
-import CardContent from '@mui/material/CardContent';
 import * as React from 'react';
+import axios from 'axios';
 
 
 export default function Home() {
+    let categories=['Food','Travel','Shopping','Others']
 
-    const [selectedOptions, setSelectedOptions] = React.useState([]);
-    const [selectedPercent, setPercentOptions] = React.useState([]);
-
-    const option = document.getElementById('options').value;
-    const percent = document.getElementById('percents').value;
-
-    
-    const handleOptionChange = () => {
-        const selectedOption = option;
-        setSelectedOptions((prevOptions) => [...prevOptions, selectedOption]);
-    };
-    const handlePercentChange = () => {
-        const selectedPercent = percent;
-        setPercentOptions((prevPercent) => [...prevPercent, selectedPercent]);
-    };
-    const handleCategory = () => {
-        handleOptionChange();
-        handlePercentChange();
-     
-        return (
-            <>
-                
-                <Text/>
-            </>
-        )
-    }
-    const Text=()=>{
-            <div>
-                    {selectedOptions.map((option, index) => (
-                        <li key={index}>{option}</li>
-                    ))}
-                    {selectedPercent.map((percent, index) => (
-                        <li key={index}>{percent}</li>
-                    ))}
-                </div> 
+    const Form=()=>{
+        return categories.map((cat)=>{
+            return <li>
+                <p>{cat}</p>
+                <TextField id="outlined-basic" label="Percentage" variant="outlined" name={cat} />
+            </li>
+        })
     }
 
-    return (
-        <>
-            <DrawerAppBar />
-            <Card sx={{ maxWidth: 345 }}>
-                <CardContent>
-                    <form action='api/expense' method='post'>
-                        <ul style={{ "listStyle": "none", "padding": "0px" }} className="form-container">
-                            <label ><h2>Enter your Budget</h2></label>
-                            <li>
-                                <TextField id="outlined-basic" variant="outlined" name='budget' type='text' />
-                            </li>
-                        </ul>
-                        <div style={{ "display": "flex", "justifyContent": "space-between" }}>
-                            <div>
-                                <div >
-                                    <select name='options' style={{ "listStyle": "none" }} >
-                                        <option value="option1">Option 1</option>
-                                        <option value="option2">Option 2</option>
-                                        <option value="option3">Option 3</option>
-                                    </select>
-                                    <select name='percents' style={{ "listStyle": "none" }} >
-                                        <option value="25">25</option>
-                                        <option value="50">50</option>
-                                        <option value="75">75</option>
-                                    </select>
-                                    <button onClick={handleCategory}>Add</button>
-                                    <div>
-                                        <p>Selected Options:</p>
-                                        <handleCategory></handleCategory>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </form>
-                </CardContent>
-                <CardActions>
-                    <Button variant="contained" color="primary" type='submit'>Submit</Button>
-                </CardActions>
-            </Card>
-        </>
+    const handelsubmit=(e)=>{
+        e.preventDefault()
+        var data=[]
+        data=[{
+            category:'Budget',
+            amount:e.target.budget.value
+        },{
+            category:'Food',
+            percentage:e.target.Food.value
+        },
+        {
+            category:'Travel',
+            percentage:e.target.Travel.value
+        },
+        {
+            category:'Shopping',
+            percentage:e.target.Shopping.value
+        },
+        {
+            category:'Others',
+            percentage:e.target.Others.value
+        }]
+        console.log(data)
+        axios.post('/api/budget',JSON.stringify(data),{
+            headers: {
+                Authorization: "Bearer " + localStorage.getItem('token'),
+                "Content-Type": "application/json",
+            },
+        }).then((res)=>{
+            if(res.data.status==='success'){
+                window.location.href='/expense'
+            }
+            else{
+                alert(res.data.message)
+                window.location.href='/'
+            }
+        }
+        ).catch((err)=>{
+            console.log(err)
+        })
+    }
 
-    );
+    return <div>
+        <form onSubmit={handelsubmit}>
+            <ul className="form-container">
+            <p>Budget</p>
+            <TextField id="outlined-basic" label="Budget" variant="outlined" name="budget" />
+            <Form />
+            </ul>
+        <Button variant="contained" color="primary" type='submit'>Submit</Button>
+        </form>
+    </div>
 }
 

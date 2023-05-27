@@ -9,7 +9,7 @@ const xssClean= require('xss-clean');
 const expenseRouter = require('./routes/expenseRouter');
 const { checkAuth } = require('./middleware/checkAuth');
 const budgetRouter = require('./routes/budgetRouter');
-
+const { Configuration, OpenAIApi  } = require('openai');
 
 // Set up logger
 app.use(morgan('dev'))
@@ -20,11 +20,46 @@ app.use(mongoSantize()) //looks at req.body and req.params and filters out '$' a
 //Data sanitization (XSS - Cross-site scripting attacks) 
 app.use(xssClean())  // protection against injection of malicious code
 
+
+//Chat Bot integration
+const configuration = new Configuration({
+  organization: process.env.GPT_ORG,
+  apiKey: process.env.GPT_KEY,
+});
+
+const openai = new OpenAIApi(configuration);
+
+app.post('/api/chat',async (req,res)=>{
+
+  console.log(req.body)
+
+  openai
+  .createCompletion({
+    model: "gpt-3.5-turbo",
+    messages: [{ role: "user", content: req.body.gptqn }],
+  })
+  .then((res) => {
+    console.log(res)
+    res.send(res.data.choices[0].message.content);
+    console.log(gptmsg);
+  })
+  .catch((e) => {
+    console.log(e);
+    res.status(500).json({
+          status: 'fail', message: e.message
+        })
+  });
+  
+})
+
+
+
 //Routes
 app.use('/api/users',userRouter)
 app.use(checkAuth)
 app.use('/api/expenses',expenseRouter)
 app.use('/api/budget',budgetRouter)
+
 
 const uri=process.env.MONGO_URI.replace('<password>', process.env.MONGO_PW)
 const PORT=process.env.PORT || 3000
