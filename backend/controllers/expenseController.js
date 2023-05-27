@@ -6,7 +6,7 @@ const asyncWrapper=require('express-async-handler')
 exports.getAllExpenses=asyncWrapper(async (req, res)=>{
     const data = await Expense.find({})
 
-    if(!data){
+    if(!data || !(data.length)){
         res.status(404)
         throw new Error('No expenses found')
     }
@@ -22,8 +22,8 @@ exports.createExpense=asyncWrapper(async (req, res)=>{
     let { title, tag, amount } = req.body
     let uid = req.user
 
-    title=title.trim()
-    tag=tag.trim()
+    title= title!=undefined && title.trim()
+    tag=tag!=undefined && tag.trim()
 
     if(!title || !tag){
         res.status(400)

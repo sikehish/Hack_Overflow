@@ -5,7 +5,6 @@ const expenseRouter= express.Router()
 const { checkAuth } = require('../middleware/checkAuth')
 const { createExpense, getAllExpenses, deleteExpense, editExpense } = require('../controllers/expenseController')
 
-app.use(checkAuth)
 expenseRouter.route('/').get(getAllExpenses).post(createExpense)
 expenseRouter.route('/:id').patch(editExpense).delete(deleteExpense)
 
