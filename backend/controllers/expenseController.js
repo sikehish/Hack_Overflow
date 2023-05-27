@@ -4,16 +4,35 @@ const validator=require('validator');
 const asyncWrapper=require('express-async-handler')
 
 exports.getAllExpenses=asyncWrapper(async (req, res)=>{
-    const data = await Expense.find({})
+    // const data = await Expense.find({})
 
-    if(!data || !(data.length)){
+    // if(!data || !(data.length)){
+    //     res.status(404)
+    //     throw new Error('No expenses found')
+    // }
+
+    const pipeline = [
+        {
+            $group: {
+                _id: { $substr: ["$createdAt", 0, 9] },
+                expenses: {
+                    $push: "$$ROOT",
+                },
+            },
+        },
+      ];
+
+      const aggregatedData= await Expense.aggregate(pipeline)
+
+      if(!aggregatedData || !(aggregatedData.length)){
         res.status(404)
         throw new Error('No expenses found')
     }
 
+      
     res.status(200).json({
         status:'success',
-        data
+        data: aggregatedData
     })
 })
 
@@ -30,7 +49,7 @@ exports.createExpense=asyncWrapper(async (req, res)=>{
         throw new Error('Invalid data')
     }
     
-    if(isNaN(amount)){
+    if(isNaN(amount) || !amount){
         res.status(400)
         throw new Error('Invalid amount')
     }

@@ -20,7 +20,12 @@ const expenseSchema = new mongoose.Schema({
   amount: {
     type: Number,
     required: true,
-    min:[0.1, 'Amount cannot be less than 0.1']
+    validate: {
+      validator: function(value) {
+        return value > 0;
+      },
+      message: 'Amount must be greater than zero.'
+    }
   },
 },{
   timestamps: true
