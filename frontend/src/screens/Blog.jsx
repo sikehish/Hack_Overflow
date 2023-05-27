@@ -1,4 +1,5 @@
 import { makeStyles } from '@material-ui/core/styles';
+import axios from "axios" 
 import {
   Container,
   Typography,
@@ -7,6 +8,7 @@ import {
   CardContent,
   CardMedia,
 } from '@material-ui/core';
+import { useEffect, useState } from 'react';
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -23,16 +25,33 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+
+
 const BlogTemplate = () => {
   const classes = useStyles();
 
+  useEffect(() =>{
+    const fetchBlogs=async ()=>{
+            const data =await axios.get("/api/blog")
+            console.log(data)
+            setBlogs(data.data)
+    }
+
+    fetchBlogs()
+     
+    
+  },[])
+
+  const [blogs,setBlogs]=useState()
+
   return (
     <Container className={classes.container}>
+        {blogs.map((post) => (
+            <>
       <Typography variant="h4" component="h1" gutterBottom>
-        {data.title}
+        {post.title}
       </Typography>
       <Grid container spacing={2}>
-        {blogPosts.map((post) => (
           <Grid item key={post.id} xs={12} sm={6} md={4}>
             <Card className={classes.card}>
               <CardMedia
@@ -47,8 +66,9 @@ const BlogTemplate = () => {
               </CardContent>
             </Card>
           </Grid>
-        ))}
       </Grid>
+      </>
+        ))}
     </Container>
   );
 };
