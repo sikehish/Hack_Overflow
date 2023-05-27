@@ -45,7 +45,7 @@ exports.createExpense=asyncWrapper(async (req, res)=>{
 
 exports.deleteExpense=asyncWrapper(async (req, res)=>{
 
-    let { id } = req.body
+    const { id } = req.params
 
     const data= await Expense.findByIdAndDelete(id)
 
@@ -63,7 +63,8 @@ exports.deleteExpense=asyncWrapper(async (req, res)=>{
 
 exports.editExpense=asyncWrapper(async (req, res)=>{
 
-    let { id, title, tag, amount } = req.body
+    let { title, tag, amount } = req.body
+    const { id } = req.params
     let uid = req.user
 
     title= title!=undefined && title.trim()
