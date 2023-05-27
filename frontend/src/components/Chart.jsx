@@ -17,12 +17,11 @@ function Charte() {
             .then((res) => {
                 if(res.data.status==='success'){
                     setExp(res.data.data)
-                    console.log(res.data)
-                    const temp=exp.map((data) => {
+                    const temp=res.data.data.map((data) => {
                         return ([data._id,data.expenses])
                     })
-                    console.log(temp)
                     setData([["Task", "Amount"],...temp])
+                    console.log(temp)
                 }
                 else{
                     console.log('res.data.message')
@@ -35,8 +34,21 @@ function Charte() {
     }, [])
 
     const Display=()=>{
-        
+        return exp.map((data)=>{
+            if(data.expenses>data.targetExpense){
+                return <div>
+                    <p>Your expenses in  <b>{data._id} </b> is over by {data.expenses-data.targetExpense} than your target</p>
+                </div>
+            }
+            else{
+                return <div>
+                <p>Your expenses in  <b>{data._id} </b> is less than the target by {data.expenses-data.targetExpense}</p>
+            </div>
+            }
+        })
     }
+
+
 
     return (
         <>
@@ -48,6 +60,8 @@ function Charte() {
             height="400px"
             legendToggle
         />
+        <Display />
+        <p>I admire your financial discipline. You have always been able to make wise financial decisions, even when it was difficult.</p>
         </>
         
     )
