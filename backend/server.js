@@ -1,6 +1,6 @@
 const dotenv=require('dotenv').config()
 const app=require('./app') //Importing the instantiated/initialsed app from app.js
-
+const  userRouter  = require('./routes/userRouter')
 const mongoose=require('mongoose')
 const morgan=require('morgan');
 
@@ -8,7 +8,7 @@ const morgan=require('morgan');
 app.use(morgan('dev'))
 
 //Routes
-
+app.use('/api/users',userRouter)
 
 const uri=process.env.MONGO_URI.replace('<password>', process.env.MONGO_PW)
 const PORT=process.env.PORT || 3000
