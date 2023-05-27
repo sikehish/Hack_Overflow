@@ -8,13 +8,14 @@ import Home from './screens/Home';
 import Expense from './components/Expense';
 import Expdis from './components/Expdis';
 import Chart from './components/Chart';
+import Bot from './screens/Bot';
 
 function App() {
   return (
     <>
       <Router>
         <Routes>
-          <Route path='/' element={<Home/>} />
+        <Route path='/' element={<Home/>} />
           <Route path='/login' element={<Login/>} />
           <Route path='/signup' element={<Signup/>} />
           <Route path='/forgot' element={<Forgot/>} />
