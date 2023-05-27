@@ -23,6 +23,7 @@ function App() {
           <Route path='/Password' element={<Password/>} />
           <Route path='/expense' element={<Table/>} />
           <Route path='/chart' element={<Chart/>} />
+          <Route path='/bot' element={<Bot/>} />
         </Routes>
       </Router>
     </>

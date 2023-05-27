@@ -1,7 +1,8 @@
 const Expense = require('../models/expenseModel');
 const { sendMail } = require('../utils/mailFunc');
 const validator=require('validator');
-const asyncWrapper=require('express-async-handler')
+const asyncWrapper=require('express-async-handler');
+const Budget = require('../models/budgetModel');
 
 exports.getAllExpenses=asyncWrapper(async (req, res)=>{
     // const data = await Expense.find({})
@@ -145,15 +146,25 @@ exports.getAnalysedData=asyncWrapper(async (req,res)=>{
       ];
 
       const aggregatedData= await Expense.aggregate(pipeline)
+      console.log(req.user)
 
-      if(!aggregatedData || !(aggregatedData.length)){
+          if(!aggregatedData ||!(aggregatedData.length)){
         res.status(404)
         throw new Error('No expenses found')
     }
 
+      const { tags, budget }= await Budget.findOne({ uid: req.user})
+      const tagData=tags.map((ele, i)=>{
+          return {...aggregatedData[i],
+            name: ele.name,
+            targetExpense: ele.percentage/100 * budget
+        }
+    })
+    console.log(budget + JSON.stringify(tagData))
       
     res.status(200).json({
         status:'success',
-        data: aggregatedData
+        budget,
+        data: tagData,
     })
 })

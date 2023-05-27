@@ -47,9 +47,9 @@ function DrawerAppBar(props) {
   const container = window !== undefined ? () => window().document.body : undefined;
 
   return (
-    <Box sx={{ display: 'flex' }}>
+    <Box  sx={{ display: 'flex' }}>
       <CssBaseline />
-      <AppBar component="nav">
+      <AppBar component="nav" bgcolor={"#B270A2"}>
         <Toolbar>
           <IconButton
             color="inherit"
