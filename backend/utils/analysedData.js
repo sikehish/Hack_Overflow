@@ -40,8 +40,10 @@ const currentMonth = currentDate.getMonth() + 1;
         res.status(404)
         throw new Error('No expenses found')
     }
-    const { tags, budget }= await Budget.findOne({ uid: req.user})
-    console.log(tags)
+    console.log(req.user)
+    const data= await Budget.findOne({ uid: req.user})
+    const { tags, budget } = data
+    console.log(data)
       const tagData=tags.map((ele, i)=>{
           return {...aggregatedData[i],
             name: ele.name.toLowerCase(),

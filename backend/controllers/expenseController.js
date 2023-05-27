@@ -12,10 +12,11 @@ exports.getAllExpenses=asyncWrapper(async (req, res)=>{
     //     res.status(404)
     //     throw new Error('No expenses found')
     // }
-
+    console.log(typeof(req.user))
     const pipeline = [
-        {
-            $group: {
+                { $match: { $expr : { $eq: [ '$uid' , { $toObjectId: req.user } ] } } }
+,
+           { $group: {
                 _id: { $substr: ["$createdAt", 0, 9] },
                 expenses: {
                     $push: "$$ROOT",
@@ -30,7 +31,6 @@ exports.getAllExpenses=asyncWrapper(async (req, res)=>{
         res.status(404)
         throw new Error('No expenses found')
     }
-
       
     res.status(200).json({
         status:'success',
@@ -73,6 +73,22 @@ exports.createExpense=asyncWrapper(async (req, res)=>{
         const html= `<h2>Hello, ${name}!</h2>
         <p>Your expenses related to ${tag} have increased. </p>
         <p>Expenses: ${filteredData.expenses} and Target Expense: ${filteredData.targetExpense} </p>`
+        sendMail(email,subject, html)
+    }
+
+    if(percentage == 100){
+        const subject = `fintrk: ${tag} expense has met the target expenditure`
+        const html= `<h2>Hello, ${name}!</h2>
+        <p>Your expenses related to ${tag} have increased. </p>
+        <p>Expenses: ${filteredData.expenses} and Target Expense: ${filteredData.targetExpense}</p>`
+        sendMail(email,subject, html)
+    }
+
+    if(percentage>90){
+        const subject = `fintrk: ${tag} expense is nearing the target expenditure`
+        const html= `<h2>Hello, ${name}!</h2>
+        <p>Your expenses related to ${tag} have increased. </p>
+        <p>Expenses: ${filteredData.expenses} and Target Expense: ${filteredData.targetExpense}</p>`
         sendMail(email,subject, html)
     }
 
