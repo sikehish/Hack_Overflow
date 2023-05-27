@@ -29,11 +29,11 @@ function Signup() {
         })
             .then((res) => {
                 if (res.data.status === 'success') {
-                    res.redirect('/')
+                    window.location.href = '/'
                 }
                 else {
                     alert(res.data.message)
-                    res.redirect('/signup')
+                    window.location.href = '/signup'
                 }
             })
             .catch((err) => {
