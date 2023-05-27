@@ -84,10 +84,10 @@ exports.createExpense=asyncWrapper(async (req, res)=>{
     const percentage= filteredData.expenses/filteredData.targetExpense * 100
 
     if(filteredData.expenses>filteredData.targetExpense) {
-        const subject = `fintrk: ${tag} expenses is ${percentage}% over Target Expenditure`
+        const subject = `fintrk: ${tag} expenses is ${Math.round(percentage)}% over Target Expenditure`
         const html= `<h2>Hello, ${name}!</h2>
         <p>Your expenses related to ${tag} have increased. </p>
-        <p>Expenses: ${filteredData.expenses} and Target Expense: ${filteredData.targetExpense} </p>`
+        <p>Expenses: ${filteredData.expenses}₹ and Target Expense: ${filteredData.targetExpense}₹ </p>`
         sendMail(email,subject, html)
     }
 
@@ -95,7 +95,7 @@ exports.createExpense=asyncWrapper(async (req, res)=>{
         const subject = `fintrk: ${tag} expense has met the target expenditure`
         const html= `<h2>Hello, ${name}!</h2>
         <p>Your expenses related to ${tag} have increased. </p>
-        <p>Expenses: ${filteredData.expenses} and Target Expense: ${filteredData.targetExpense}</p>`
+        <p>Expenses: ${filteredData.expenses}₹ and Target Expense: ${filteredData.targetExpense}₹</p>`
         sendMail(email,subject, html)
     }
 
@@ -103,7 +103,7 @@ exports.createExpense=asyncWrapper(async (req, res)=>{
         const subject = `fintrk: ${tag} expense is nearing the target expenditure`
         const html= `<h2>Hello, ${name}!</h2>
         <p>Your expenses related to ${tag} have increased. </p>
-        <p>Expenses: ${filteredData.expenses} and Target Expense: ${filteredData.targetExpense}</p>`
+        <p>Expenses: ${filteredData.expenses}₹ and Target Expense: ${filteredData.targetExpense}₹</p>`
         sendMail(email,subject, html)
     }
 
