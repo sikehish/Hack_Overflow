@@ -2,6 +2,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import axios from "axios" 
 import {
   Container,
+  Button,
   Typography,
   Grid,
   Card,
@@ -67,6 +68,7 @@ const BlogTemplate = () => {
             </Card>
           </Grid>
       </Grid>
+      <Button>Delete</Button>
       </>
         ))}
     </Container>
