@@ -9,7 +9,9 @@ const xssClean= require('xss-clean');
 const expenseRouter = require('./routes/expenseRouter');
 const { checkAuth } = require('./middleware/checkAuth');
 const budgetRouter = require('./routes/budgetRouter');
-const { Configuration, OpenAIApi  } = require('openai');
+const blogRouter=require('./routes/blogRouter')
+
+// const { Configuration, OpenAIApi  } = require('openai');
 
 // Set up logger
 app.use(morgan('dev'))
@@ -21,7 +23,7 @@ app.use(mongoSantize()) //looks at req.body and req.params and filters out '$' a
 app.use(xssClean())  // protection against injection of malicious code
 
 
-//Chat Bot integration
+// Chat Bot integration
 const configuration = new Configuration({
   organization: process.env.GPT_ORG,
   apiKey: process.env.GPT_KEY,
@@ -59,6 +61,7 @@ app.use('/api/users',userRouter)
 app.use(checkAuth)
 app.use('/api/expenses',expenseRouter)
 app.use('/api/budget',budgetRouter)
+app.use('/api/blog',blogRouter)
 
 
 const uri=process.env.MONGO_URI.replace('<password>', process.env.MONGO_PW)
@@ -86,6 +89,3 @@ mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true })
   .catch((err) => {
     console.error('Error connecting to MongoDB Atlas:', err);
   });
-
-
-								
