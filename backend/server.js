@@ -7,6 +7,7 @@ const morgan=require('morgan');
 const mongoSantize = require('express-mongo-sanitize')
 const xssClean= require('xss-clean');
 const expenseRouter = require('./routes/expenseRouter');
+const { checkAuth } = require('./middleware/checkAuth');
 const budgetRouter = require('./routes/budgetRouter');
 
 // Set up logger
@@ -20,6 +21,7 @@ app.use(xssClean())  // protection against injection of malicious code
 
 //Routes
 app.use('/api/users',userRouter)
+app.use(checkAuth)
 app.use('/api/expenses',expenseRouter)
 app.use('/api/budget',budgetRouter)
 

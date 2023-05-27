@@ -11,8 +11,7 @@ const expenseSchema = new mongoose.Schema({
     type: String,
     required: true,
     trim: true,
-    minlength: [3, 'Your title cannot be less than 3 characters'],
-    maxlength: [20,'Your tttle cannot exceed 20 characters']
+    minlength: [1, 'Your title cannot be less than 1 characters'],
   },
   tag: {
     type: String,
@@ -20,7 +19,12 @@ const expenseSchema = new mongoose.Schema({
   amount: {
     type: Number,
     required: true,
-    min:[0.1, 'Amount cannot be less than 0.1']
+    validate: {
+      validator: function(value) {
+        return value > 0;
+      },
+      message: 'Amount must be greater than zero.'
+    }
   },
 },{
   timestamps: true
