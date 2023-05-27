@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 // Define the User schema
 const expenseSchema = new mongoose.Schema({
     uid: {
-        type: Schema.Types.ObjectId,
+        type: mongoose.Schema.Types.ObjectId,
         required: true,
         ref: "User",
       },
