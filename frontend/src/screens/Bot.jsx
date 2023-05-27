@@ -3,7 +3,7 @@ import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import Button from '@mui/material/Button';
 import DrawerAppBar from '../components/Navbar';
-
+import SmartToyIcon from '@mui/icons-material/SmartToy';
 
 
 export default function Bot() {
@@ -14,13 +14,10 @@ export default function Bot() {
                 <Card sx={{ minWidth: 275 }}>
                     <CardContent>
                         <h1>Welcome to your finance chat bot </h1>
-                        <h3>Get insights for</h3>
-                        <label htmlFor="">Finance</label>
-                        <input type="radio" name="opt" value="finance" />
-                        <label htmlFor="">Buisness</label>
-                        <input type="radio" name="opt" value="buisness" />
-                        <label htmlFor="">Market</label>
-                        <input type="radio" name="opt" value="market" />
+                        <SmartToyIcon/>
+                        <h2>Some Common Questions</h2>
+                        <h3>Give me some finance tips ? <br /> How can I reduce my monthly expenses? <br /> How can I save on transportation costs? <br /> How can I save on energy bills?</h3>
+                        <input  placeholder='Enter your question'  type="text" name="gptqn" id="" style={{"wordWrap":"break-word","wordBreak":"break-all","height":"100px","width":"60%"}} />
                     </CardContent>
                     <CardActions>
                         <Button size="small" type='submit'>Get some insights</Button>
