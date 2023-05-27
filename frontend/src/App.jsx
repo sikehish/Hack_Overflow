@@ -7,6 +7,7 @@ import Password from './screens/Password';
 import Home from './screens/Home';
 import Expense from './components/Expense';
 import Expdis from './components/Expdis';
+import Chart from './components/Chart';
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
           <Route path='/Password' element={<Password/>} />
           <Route path='/expense' element={<Expense/>} />
           <Route path='/expdis' element={<Expdis/>} />
+          <Route path='/chart' element={<Chart/>} />
         </Routes>
       </Router>
     </>
