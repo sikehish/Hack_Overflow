@@ -15,11 +15,10 @@ function Footer(){
 
         <div class="box">
             <h3>CONTACT INFO</h3>
-            <a href="#"> <i class="fas fa-phone"></i>+91 9448483336</a>
-            <a href="#"> <i class="fas fa-phone"></i>+91 9448483335</a>
-            <a href="mailto:leenacreation4u@gmail.com"> <i class="fas fa-envelope"></i>leenacreation4u@gmail.com</a>
-            <a href="mailto:avihanvaisri@gmail.com"> <i class="fas fa-envelope"></i>avihanvaisri@gmail.com</a>
-            <a href="#"> <i class="fas fa-map-marker-alt"></i>BALLARI,KARNATAKA,INDIA - 583102 </a>
+            <a href="#"> <i class="fas fa-phone"></i>+91 9231232141</a>
+            <a href="#"> <i class="fas fa-phone"></i>+91 9123123123</a>
+            <a href="mailto:leenacreation4u@gmail.com"> <i class="fas fa-envelope"></i>fintresk@gmail.com</a>
+            <a href="#"> <i class="fas fa-map-marker-alt"></i>Mysuru,KARNATAKA,INDIA - 583102 </a>
         </div>
 
         <div class="box">

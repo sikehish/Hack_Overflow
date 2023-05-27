@@ -23,10 +23,10 @@ function Charte() {
                     })
                     setData([["Task", "Amount"], ...temp])
                 }
-                else {
-                    console.log('res.data.message')
-                    window.location.href = '/chart'
-                }
+                // else {
+                //     console.log('res.data.message')
+                //     window.location.href = '/chart'
+                // }
             })
             .catch((err) => {
                 console.log(err)
@@ -43,10 +43,10 @@ function Charte() {
                     setExp2(res.data.data[0].expenses)
                     console.log(res.data.data[0].expenses)
                 }
-                else {
-                    console.log('res.data.message')
-                    window.location.href = '/expdis'
-                }
+                // else {
+                //     console.log('res.data.message')
+                //     window.location.href = '/expdis'
+                // }
             })
             .catch((err) => {
                 console.log(err)
@@ -68,6 +68,7 @@ function Charte() {
         })
     }
 
+    
 
 
     return (
