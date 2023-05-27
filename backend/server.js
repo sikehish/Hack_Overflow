@@ -1,6 +1,6 @@
 const dotenv=require('dotenv').config()
 const app=require('./app') //Importing the instantiated/initialsed app from app.js
-const  userRouter  = require('./routes/userRouter')
+const userRouter  = require('./routes/userRouter')
 const mongoose=require('mongoose')
 const morgan=require('morgan');
 
