@@ -5,6 +5,7 @@ function Table() {
     return (
         <>
             <DrawerAppBar />
+            <h1 style={{"margin":"0"}}>Add Expenses</h1>
             <div style={{ "Display": "flex" }}>
                 <Expense />
                 <Expdis />

@@ -20,13 +20,13 @@ function Expdis() {
             },
         })
             .then((res) => {
-                if(res.data.status==='success'){
-                console.log(res.data.data[0].expenses)
-                setExp(res.data.data[0].expenses)
+                if (res.data.status === 'success') {
+                    console.log(res.data.data[0].expenses)
+                    setExp(res.data.data[0].expenses)
                 }
-                else{
+                else {
                     console.log('res.data.message')
-                    window.location.href='/expdis'
+                    window.location.href = '/expdis'
                 }
             })
             .catch((err) => {
@@ -35,12 +35,20 @@ function Expdis() {
     }, [])
     const Tabledata = () => {
         return exp.map((data) => {
+            // eslint-disable-next-line react/jsx-key
             return (<div>
                 <tr>
-                    <td>{data.amount}</td>
-                    <td>{data.title}</td>
-                    <td>{data.tag}</td>
-                    <td>{data.date}</td>
+                    {/* <td style={{"width":"200px"}}>{data.amount}</td>
+                    <td style={{"width":"200px"}}>{data.title}</td>
+                    <td style={{"width":"200px"}}>{data.tag}</td>
+                    <td style={{"width":"200px"}}>{data.date}</td> */}
+                    <div style={{"display":"flex","justifyContent":"stretch"}}>
+                            <p style={{"width":"200px"}}>{data.amount}</p>
+                            <p style={{"width":"200px"}}>{data.title}</p> 
+                            <p style={{"width":"200px"}}>{data.tag}</p>
+                            <p style={{"width":"200px"}}>{data.createdAt}</p>
+                    </div>
+
                 </tr>
             </div>)
         })
@@ -49,16 +57,16 @@ function Expdis() {
 
 
     return <div>
-        <table>
-            <tr>
-                <th>Expense</th>
-                <th>Title</th>
-                <th>Category</th>
-                <th>Date</th>
-            </tr>
+     
+            <div style={{"display":"flex","justifyContent":"stretch"}}>
+                            <p style={{"width":"200px"}}>Expense</p>
+                            <p style={{"width":"200px"}}>item</p> 
+                            <p style={{"width":"200px"}}>price</p>
+                            <p style={{"width":"200px"}}>date</p>
+                    </div>
             <Tabledata />
-        </table>
-        <Button variant="contained" color="primary" onClick={handleclickp}>Previous</Button>
+      
+        <Button style={{ "margin": "10px 10px" }} variant="contained" color="primary" onClick={handleclickp}>Previous</Button>
         <Button variant="contained" color="primary" onClick={handelclickn}>Next</Button>
     </div>
 }

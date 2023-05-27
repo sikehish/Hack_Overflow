@@ -5,6 +5,7 @@ import DrawerAppBar from "./Navbar";
 
 function Charte() {
     const [exp, setExp] = React.useState([])
+    const [exp2, setExp2] = React.useState([])
     const [data, setData] = React.useState([["Task", "Hours per Day"]])
 
     useEffect(async () => {
@@ -15,18 +16,36 @@ function Charte() {
             },
         })
             .then((res) => {
-                if(res.data.status==='success'){
+                if (res.data.status === 'success') {
                     setExp(res.data.data)
-                    console.log(res.data)
-                    const temp=exp.map((data) => {
-                        return ([data._id,data.expenses])
+                    let temp = res.data.data.map((data) => {
+                        return ([data._id, data.expenses])
                     })
-                    console.log(temp)
-                    setData([["Task", "Amount"],...temp])
+                    setData([["Task", "Amount"], ...temp])
                 }
-                else{
+                else {
                     console.log('res.data.message')
-                    window.location.href='/chart'
+                    window.location.href = '/chart'
+                }
+            })
+            .catch((err) => {
+                console.log(err)
+            })
+
+        axios.get('/api/expenses', {
+            headers: {
+                "Authorization": "Bearer " + localStorage.getItem('token'),
+                "Content-Type": "application/json",
+            },
+        })
+            .then((res) => {
+                if (res.data.status === 'success') {
+                    setExp2(res.data.data[0].expenses)
+                    console.log(res.data.data[0].expenses)
+                }
+                else {
+                    console.log('res.data.message')
+                    window.location.href = '/expdis'
                 }
             })
             .catch((err) => {
@@ -34,22 +53,43 @@ function Charte() {
             })
     }, [])
 
-    const Display=()=>{
-        
+    const Display = () => {
+        return exp.map((data) => {
+            if (data.expenses > data.targetExpense) {
+                return <div style={{"color":"red"}}>
+                    <p>Your expenses in  <b>{data._id} </b> is over by {data.expenses - data.targetExpense} than your target</p>
+                </div>
+            }
+            else {
+                return <div>
+                    <p>Your expenses in  <b>{data._id} </b> is less than the target by {data.expenses - data.targetExpense}</p>
+                </div>
+            }
+        })
     }
+
+
 
     return (
         <>
             <DrawerAppBar />
-        <Chart
-            chartType="PieChart"
-            data={data}
-            width="100%"
-            height="400px"
-            legendToggle
-        />
+            <Chart
+                chartType="PieChart"
+                data={data}
+                width="100%"
+                height="400px"
+                legendToggle
+            />
+            <Chart
+                chartType="Line"
+                width="100%"
+                height="400px"
+                data={data}
+            />
+            <Display />
+            <p>I admire your financial discipline. You have always been able to make wise financial decisions, even when it was difficult.</p>
         </>
-        
+
     )
 }
 
