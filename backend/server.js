@@ -1,18 +1,40 @@
 const dotenv=require('dotenv').config()
-const app=require('./app') //Importing the instantiated/initialsed app from app.js
-const userRouter  = require('./routes/userRouter')
+const app=require('./app'); //Importing the instantiated/initialsed app from app.js
+const globalErrHandler = require('./middleware/errorHandler');
+const  userRouter  = require('./routes/userRouter')
 const mongoose=require('mongoose')
 const morgan=require('morgan');
+const mongoSantize = require('express-mongo-sanitize')
+const xssClean= require('xss-clean');
+const expenseRouter = require('./routes/expenseRouter');
 
 // Set up logger
 app.use(morgan('dev'))
 
+//Data sanitization (NoSQL query injection protection)
+app.use(mongoSantize()) //looks at req.body and req.params and filters out '$' and '.'
+
+//Data sanitization (XSS - Cross-site scripting attacks) 
+app.use(xssClean())  // protection against injection of malicious code
+
 //Routes
 app.use('/api/users',userRouter)
+app.use('/api/expenses',expenseRouter)
 
 const uri=process.env.MONGO_URI.replace('<password>', process.env.MONGO_PW)
 const PORT=process.env.PORT || 3000
 
+
+//Middleware for unhandled routes
+app.all('*', (req,res,next) => {
+  res.status(404).json({
+    status: 'fail', message: `The API endpoint ${req.url} does not exist!`
+  })
+
+})
+
+//Global error handler to handle all errors thrown in the controllers
+app.use(globalErrHandler)
 
 mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => {
@@ -25,11 +47,5 @@ mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true })
     console.error('Error connecting to MongoDB Atlas:', err);
   });
 
-//Middleware for unhandled routes
-app.use((req,res,next) => {
-  res.status(404).json({
-    status: 'fail', message: `The API endpoint ${req.url} does not exist!`
-  })
 
-})
 								

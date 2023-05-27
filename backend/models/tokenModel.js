@@ -1,11 +1,9 @@
-
 const mongoose = require("mongoose");
-const Schema = mongoose.Schema;
 
 
-const tokenSchema = new Schema({
+const tokenSchema = new mongoose.Schema({
   uid: {
-    type: Schema.Types.ObjectId,
+    type: mongoose.Schema.Types.ObjectId,
     required: true,
     ref: "User",
   },
