@@ -35,12 +35,12 @@ function Login() {
     }
 
     return (<>
-        <div style={{"display":"flex","justifyContent":"space-around"}}>
+        <div style={{"display":"flex","justifyContent":"space-evenly"}}>
             <div>
-                <img src="images/loginpic.svg" alt=""  />
+                <img src="images/loginpic.svg" alt="" style={{"width":"80%"}}  />
             </div>
             
-            <div style={{"padding":"30px 0","background":"#D9D9D9","border":"1px solid","width":"40%"}}>
+            <div style={{"padding":"30px 0","background":"#D9D9D9","border":"1px solid","width":"600px"}}>
                 <form onSubmit={handleSubmit}>
                     <h1>Login</h1>
                     <ul style={{ "listStyle": "none","padding":"10px 0" }} className="form-container">

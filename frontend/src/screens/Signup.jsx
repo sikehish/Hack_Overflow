@@ -43,9 +43,9 @@ function Signup() {
 
     return (
         <>
-            <div style={{ "display": "flex", "justifyContent": "space-around" }}>
+            <div style={{ "display": "flex", "justifyContent": "space-evenly" }}>
                 <img src="images/signup.svg" alt="" />
-                <div style={{ "padding": "10px 35px","border":"1px solid" }}>
+                <div style={{ "padding": "10px 35px" }}>
                     <h1>Sign Up</h1>
                     <form onSubmit={handleSubmit}>
                         <ul className="form-container" style={{ "listStyle": "none", "padding": "2px 0" }}>

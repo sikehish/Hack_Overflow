@@ -1,11 +1,10 @@
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
-import Select from '@mui/material/Select';
 import axios from 'axios';
 import React from 'react';
 function Expense() {
     var categories = ['Food', 'Travel', 'Shopping', 'Others']
-    var tabledata = [""]
+   
 
     function Options(){
         return categories.map((cat) => {
@@ -47,21 +46,21 @@ function Expense() {
 
     return (<div>
         <form onSubmit={handleSubmit}>
-            <ul className="form-container">
+            <ul className="form-container" style={{"listStyle":"none"}}>
                 <li>
-                    <TextField id="outlined-basic" label="Expense" variant="outlined" name='expense' />
+                    <TextField style={{"padding":"10px"}} id="outlined-basic" label="Expense" variant="outlined" name='expense' />
                 </li>
                 <li>
-                    <TextField id="outlined-basic" label="Title" variant="outlined" name='title' />
+                    <TextField style={{"padding":"10px"}} id="outlined-basic" label="Title" variant="outlined" name='title' />
                 </li>
                 <li>
-                    <label for="cat">Choose a categorie:</label>
+                    <label style={{"padding":"0 10px"}}>Choose a categorie:</label>
                     <select name="cat" id="cat">
                         <Options />
                     </select>
                 </li>
                 <li>
-                    <Button variant="contained" color="primary" type='submit'>Add +</Button>
+                    <Button style={{"margin":"10px 0"}} variant="contained" color="primary" type='submit'>Add +</Button>
                 </li>
             </ul>
         </form>
