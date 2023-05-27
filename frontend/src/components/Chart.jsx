@@ -7,8 +7,8 @@ function Charte() {
     const [exp, setExp] = React.useState([])
     const [data, setData] = React.useState([["Task", "Hours per Day"]])
 
-    useEffect(() => {
-        axios.get('/api/expenses/analysis', {
+    useEffect(async () => {
+        await axios.get('/api/expenses/analysis', {
             headers: {
                 "Authorization": "Bearer " + localStorage.getItem('token'),
                 "Content-Type": "application/json",
