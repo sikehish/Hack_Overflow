@@ -5,6 +5,11 @@ const { isEmail, isStrongPassword } = require('validator');
 
 // Define the User schema
 const expenseSchema = new mongoose.Schema({
+    uid: {
+        type: Schema.Types.ObjectId,
+        required: true,
+        ref: "User",
+      },
   title: {
     type: String,
     required: true,
