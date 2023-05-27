@@ -7,7 +7,7 @@ function Login(){
         <form action='/api/' method='post'>
             <ul className="form-container">
                 <li>
-                <TextField id="outlined-basic" label="Username" variant="outlined" name='username'/>
+                <TextField id="outlined-basic" label="Email" variant="outlined" name='email' type='email'/>
                 </li>
                 <li>
                 <TextField id="outlined-basic" label="Password" variant="outlined" name='password' type='password'/>
