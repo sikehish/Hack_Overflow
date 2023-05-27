@@ -12,8 +12,8 @@ const { requestReset, passwordReset } = require('../utils/passwords');
 
 // Set up routes
 exports.userSignup=asyncWrapper(async (req, res) => {
+  console.log(req.body)
     let { name, email, password, confirmPassword } = req.body;
-
     name=name.trim()
     email=email.trim()
     password=password.trim()
