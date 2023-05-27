@@ -6,4 +6,4 @@ const { createBudget, getBudget, editBudget } = require('../controllers/expenseC
 budgetRouter.route('/').post(createBudget)
 budgetRouter.route('/:id').patch(editBudget).get(getBudget)
 
-module.exports=BudgetRouter
+module.exports=budgetRouter
