@@ -1,0 +1,1 @@
+const { sendMail } = require('../utils/mailFunc');
