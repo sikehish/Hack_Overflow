@@ -11,7 +11,7 @@ const { checkAuth } = require('./middleware/checkAuth');
 const budgetRouter = require('./routes/budgetRouter');
 const blogRouter=require('./routes/blogRouter')
 
-// const { Configuration, OpenAIApi  } = require('openai');
+const { Configuration, OpenAIApi  } = require('openai');
 
 // Set up logger
 app.use(morgan('dev'))

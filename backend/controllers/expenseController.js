@@ -165,7 +165,7 @@ exports.editExpense=asyncWrapper(async (req, res)=>{
 
 
 
-exports.getAnalysedData=asyncWrapper(async (req,res)=>{
+exports.getAnalysis=asyncWrapper(async (req,res)=>{
 
     const { tagData, budget} = await getAnalysedData(req)
       
