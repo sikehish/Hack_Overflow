@@ -9,6 +9,7 @@ import Expense from './components/Expense';
 import Expdis from './components/Expdis';
 import Chart from './components/Chart';
 import Bot from './screens/Bot';
+import Table from './screens/Table';
 
 function App() {
   return (
@@ -20,8 +21,7 @@ function App() {
           <Route path='/signup' element={<Signup/>} />
           <Route path='/forgot' element={<Forgot/>} />
           <Route path='/Password' element={<Password/>} />
-          <Route path='/expense' element={<Expense/>} />
-          <Route path='/expdis' element={<Expdis/>} />
+          <Route path='/expense' element={<Table/>} />
           <Route path='/chart' element={<Chart/>} />
         </Routes>
       </Router>

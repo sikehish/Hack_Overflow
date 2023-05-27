@@ -3,6 +3,8 @@ import React, { useEffect } from "react"
 import axios from "axios"
 
 function Charte() {
+    const [exp, setExp] = React.useState([])
+    const [data, setData] = React.useState([["Task", "Hours per Day"]])
 
     useEffect(() => {
         axios.get('/api/expenses/analysis', {
@@ -13,7 +15,13 @@ function Charte() {
         })
             .then((res) => {
                 if(res.data.status==='success'){
+                    setExp(res.data.data)
                     console.log(res.data)
+                    const temp=exp.map((data) => {
+                        return ([data._id,data.expenses])
+                    })
+                    console.log(temp)
+                    setData([["Task", "Amount"],...temp])
                 }
                 else{
                     console.log('res.data.message')
@@ -25,16 +33,14 @@ function Charte() {
             })
     }, [])
 
+    const Display=()=>{
+        
+    }
 
     return (
         <Chart
             chartType="PieChart"
-            data={[["Task", "Hours per Day"],
-            ["Work", 11],
-            ["Eat", 2],
-            ["Commute", 2],
-            ["Watch TV", 2],
-            ["Sleep", 7],]}
+            data={data}
             width="100%"
             height="400px"
             legendToggle

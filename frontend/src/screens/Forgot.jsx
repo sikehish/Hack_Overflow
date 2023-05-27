@@ -2,6 +2,19 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import { Link } from 'react-router-dom';
 function Forgot(){
+    const handelSubmit = (e) =>{
+        e.preventDefault();
+        const email = e.target.elements.email.value;
+            axios.post('/api/users/request-reset', {email: email})
+            .then(res => {
+                alert(res.data.message);
+            }
+            )
+            .catch(err => {
+                console.log(err);
+            }
+            )
+    }
     return <div>
         <form action='/api/auth' method='post'>
             <ul className="form-container">
