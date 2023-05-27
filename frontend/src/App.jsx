@@ -5,6 +5,8 @@ import Signup from './screens/Signup';
 import Forgot from './screens/Forgot';
 import Password from './screens/Password';
 import Home from './screens/Home';
+import Expense from './components/Expense';
+import Expdis from './components/Expdis';
 
 function App() {
   return (
@@ -16,6 +18,8 @@ function App() {
           <Route path='/signup' element={<Signup/>} />
           <Route path='/forgot' element={<Forgot/>} />
           <Route path='/Password' element={<Password/>} />
+          <Route path='/expense' element={<Expense/>} />
+          <Route path='/expdis' element={<Expdis/>} />
         </Routes>
       </Router>
     </>
