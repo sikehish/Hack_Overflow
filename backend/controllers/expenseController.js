@@ -3,6 +3,7 @@ const { sendMail } = require('../utils/mailFunc');
 const validator=require('validator');
 const asyncWrapper=require('express-async-handler');
 const Budget = require('../models/budgetModel');
+const { getAnalysedData } = require('../utils/analysedData');
 
 exports.getAllExpenses=asyncWrapper(async (req, res)=>{
     // const data = await Expense.find({})
@@ -57,6 +58,23 @@ exports.createExpense=asyncWrapper(async (req, res)=>{
     }
 
     const data= await Expense.create({uid, title, tag, amount})
+
+    const { tagData, budget} = await getAnalysedData(req)
+
+    const filteredData = tagData.find(ele => ele.name === tag.toLowerCase())
+
+    const { email, name } = await User.findById(req.user)
+
+    
+    const percentage= filteredData.expenses/filteredData.targetExpense * 100
+
+    if(filteredData.expenses>filteredData.targetExpense) {
+        const subject = `fintrk: ${tag} expenses is ${percentage}% over Target Expenditure`
+        const html= `<h2>Hello, ${name}!</h2>
+        <p>Your expenses related to ${tag} have increased. </p>
+        <p>Expenses: ${filteredData.expenses} and Target Expense: ${filteredData.targetExpense} </p>`
+        sendMail(email,subject, html)
+    }
 
     res.status(200).json({
         status:'success',
@@ -114,54 +132,11 @@ exports.editExpense=asyncWrapper(async (req, res)=>{
     })
 })
 
-// Get the current date
-const currentDate = new Date();
 
-// Extract the year and month from the current date
-const currentYear = currentDate.getFullYear();
-const currentMonth = currentDate.getMonth() + 1;
 
 exports.getAnalysedData=asyncWrapper(async (req,res)=>{
-    const pipeline = [
-        {
-                $match: {
-                  $expr: {
-                    $and: [
-                      { $eq: [{ $year: '$createdAt' }, currentYear] },
-                      { $eq: [{ $month: '$createdAt' }, currentMonth] }
-                    ]
-                  }
-                }
-        },
-        {
-            $group: {
-            _id: "$tag" ,
-            expenses: {
-                $sum: "$amount",
-                
-            },
-                count:{
-                    $sum :1
-                }
-        }}
-      ];
 
-      const aggregatedData= await Expense.aggregate(pipeline)
-      console.log(req.user)
-
-          if(!aggregatedData ||!(aggregatedData.length)){
-        res.status(404)
-        throw new Error('No expenses found')
-    }
-    const { tags, budget }= await Budget.findOne({ uid: req.user})
-    console.log(tags)
-      const tagData=tags.map((ele, i)=>{
-          return {...aggregatedData[i],
-            name: ele.name.toLowerCase(),
-            targetExpense: ele.percentage/100 * budget
-        }
-    })
-    console.log(budget + JSON.stringify(tagData))
+    const { tagData, budget} = await getAnalysedData(req)
       
     res.status(200).json({
         status:'success',
