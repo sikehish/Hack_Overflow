@@ -1,7 +1,4 @@
 const mongoose = require('mongoose');
-const bcrypt = require('bcrypt');
-const jwt = require('jsonwebtoken');
-const { isEmail, isStrongPassword } = require('validator');
 
 // Define the User schema
 const expenseSchema = new mongoose.Schema({

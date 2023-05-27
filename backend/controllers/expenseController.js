@@ -30,7 +30,7 @@ exports.createExpense=asyncWrapper(async (req, res)=>{
         throw new Error('Invalid amount')
     }
 
-    if()
+    const data= await Expense.create({uid, title, tag, amount})
 
     res.status(200).json({
         status:'success',
