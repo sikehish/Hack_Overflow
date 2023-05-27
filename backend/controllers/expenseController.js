@@ -153,11 +153,11 @@ exports.getAnalysedData=asyncWrapper(async (req,res)=>{
         res.status(404)
         throw new Error('No expenses found')
     }
-
-      const { tags, budget }= await Budget.findOne({ uid: req.user})
+    const { tags, budget }= await Budget.findOne({ uid: req.user})
+    console.log(tags)
       const tagData=tags.map((ele, i)=>{
           return {...aggregatedData[i],
-            name: ele.name,
+            name: ele.name.toLowerCase(),
             targetExpense: ele.percentage/100 * budget
         }
     })
