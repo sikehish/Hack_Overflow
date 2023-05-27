@@ -5,6 +5,7 @@ import Signup from './screens/Signup';
 import Forgot from './screens/Forgot';
 import Password from './screens/Password';
 import Home from './screens/Home';
+import Bot from './screens/Bot';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
           <Route path='/signup' element={<Signup/>} />
           <Route path='/forgot' element={<Forgot/>} />
           <Route path='/Password' element={<Password/>} />
+          <Route path='/Bot' element={<Bot/>} />
         </Routes>
       </Router>
     </>
