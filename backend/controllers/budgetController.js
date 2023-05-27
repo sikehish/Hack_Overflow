@@ -29,7 +29,7 @@ exports.getBudget=asyncWrapper(async(req,res)=>{
 })
 
 exports.editBudget=asyncWrapper(async(req,res)=>{
-    const budgetData=await budget.findOneAndUpdate({uid:req.user},req.body,{
+    const budgetData=await Budget.findOneAndUpdate({uid:req.user},req.body,{
       new: true,
       runValidators: true
     })

@@ -10,6 +10,7 @@ const expenseRouter = require('./routes/expenseRouter');
 const { checkAuth } = require('./middleware/checkAuth');
 const budgetRouter = require('./routes/budgetRouter');
 
+
 // Set up logger
 app.use(morgan('dev'))
 
