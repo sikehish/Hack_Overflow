@@ -5,6 +5,14 @@
   text-align: center;
 }
 
+input {
+  text-align: center;
+}
+
+::-webkit-input-placeholder {
+  text-align: center;
+}
+
 .logo {
   height: 6em;
   padding: 1.5em;

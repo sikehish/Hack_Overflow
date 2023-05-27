@@ -23,6 +23,7 @@ function App() {
           <Route path='/expense' element={<Expense/>} />
           <Route path='/expdis' element={<Expdis/>} />
           <Route path='/chart' element={<Chart/>} />
+          <Route path='/bot' element={<Bot/>} />
         </Routes>
       </Router>
     </>
