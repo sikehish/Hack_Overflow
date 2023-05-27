@@ -4,6 +4,7 @@ const validator=require('validator');
 const asyncWrapper=require('express-async-handler');
 const Budget = require('../models/budgetModel');
 const { getAnalysedData } = require('../utils/analysedData');
+const User = require('../models/userModel');
 
 exports.getAllExpenses=asyncWrapper(async (req, res)=>{
     // const data = await Expense.find({})
@@ -55,6 +56,13 @@ exports.createExpense=asyncWrapper(async (req, res)=>{
     if(isNaN(amount) || !amount){
         res.status(400)
         throw new Error('Invalid amount')
+    }
+
+    const arr= ['food','travel','shopping','others']
+
+    if(!(arr.includes(tag))){
+        res.status(400)
+        throw new Error('Invalid tag')
     }
 
     const data= await Expense.create({uid, title, tag, amount})
