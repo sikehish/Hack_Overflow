@@ -1,7 +1,7 @@
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
-import * as React from 'react';
 import axios from 'axios';
+import DrawerAppBar from '../components/Navbar';
 
 
 export default function Home() {
@@ -9,6 +9,7 @@ export default function Home() {
 
     const Form=()=>{
         return categories.map((cat)=>{
+            // eslint-disable-next-line react/jsx-key
             return <li>
                 <p>{cat}</p>
                 <TextField id="outlined-basic" label="Percentage" variant="outlined" name={cat} />
@@ -58,7 +59,9 @@ export default function Home() {
         })
     }
 
-    return <div>
+    return (<>
+        <DrawerAppBar/>
+        <div>
         <form onSubmit={handelsubmit}>
             <ul className="form-container">
             <p>Budget</p>
@@ -68,5 +71,6 @@ export default function Home() {
         <Button variant="contained" color="primary" type='submit'>Submit</Button>
         </form>
     </div>
+    </>) 
 }
 

@@ -14,9 +14,10 @@ import MenuIcon from '@mui/icons-material/Menu';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
+import { Link } from 'react-router-dom';
 
 const drawerWidth = 240;
-const navItems = ['Home', 'About', 'Contact'];
+const navItems = [{name:'Home',link:'/'},{name:'Login',link:'/login'},{name:'SignUp',link:'/signup'},{name:'ExpenseTracker',link:'/expense'},{name:'Insight',link:'/chart'},{name:'FinanceBot',link:'/bot'}];
 
 function DrawerAppBar(props) {
   const { window } = props;
@@ -29,14 +30,14 @@ function DrawerAppBar(props) {
   const drawer = (
     <Box onClick={handleDrawerToggle} sx={{ textAlign: 'center' }}>
       <Typography variant="h6" sx={{ my: 2 }}>
-        NAME
+        FINTRK
       </Typography>
       <Divider />
       <List>
         {navItems.map((item) => (
           <ListItem key={item} disablePadding>
             <ListItemButton sx={{ textAlign: 'center' }}>
-              <ListItemText primary={item} />
+            <Link to={item.link}>{item.name}</Link>
             </ListItemButton>
           </ListItem>
         ))}
@@ -60,7 +61,7 @@ function DrawerAppBar(props) {
           >
             <MenuIcon />
           </IconButton>
-          <h2>NAME</h2>
+          <h2>FINTRK</h2>
           <Typography
             variant="h6"
             component="div"
@@ -70,7 +71,7 @@ function DrawerAppBar(props) {
           <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
             {navItems.map((item) => (
               <Button key={item} sx={{ color: '#fff' }}>
-                {item}
+                <Link style={{"color":"white"}} to={item.link}>{item.name}</Link>
               </Button>
             ))}
           </Box>

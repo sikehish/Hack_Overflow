@@ -9,6 +9,7 @@ function Expense() {
 
     function Options(){
         return categories.map((cat) => {
+            // eslint-disable-next-line react/jsx-key
             return <option value={cat}>{cat}</option>
         })
     }
@@ -34,6 +35,9 @@ function Expense() {
         .then((res)=>{
             if(res.data.status==='success'){
                 window.location.href='/expense'
+            }
+            else if(res.data.status==="Invalid data"){
+                alert(res.data.message)
             }
         })
         .catch((err)=>{
