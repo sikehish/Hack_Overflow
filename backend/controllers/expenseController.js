@@ -39,6 +39,7 @@ exports.getAllExpenses=asyncWrapper(async (req, res)=>{
 
 exports.createExpense=asyncWrapper(async (req, res)=>{
 
+        console.log(req.body)
     let { title, tag, amount } = req.body
     let uid = req.user
 
