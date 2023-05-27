@@ -1,9 +1,5 @@
 import TextField from '@material-ui/core/TextField';
-<<<<<<< HEAD
 import Button from '@material-ui/core/Button';
-=======
-
->>>>>>> c2d3659ba12a1772bccfe19a3db17e9efb077f15
 function Login(){
     return <div>
         {/* form for login page for user */}
