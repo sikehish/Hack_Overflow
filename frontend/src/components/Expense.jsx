@@ -13,7 +13,7 @@ function Expense() {
         })
     }
 
-    const [datal,setDatal]=React.useState({amount:'',title:'',tag:''})
+    const [datal,setDatal]=React.useState({})
 
     const handleSubmit=(e)=>{
         e.preventDefault()
@@ -25,7 +25,11 @@ function Expense() {
             }
         )
         console.log(localStorage.getItem('token'))
-        axios.post('/api/expenses',JSON.stringify(datal),{
+        axios.post('/api/expenses',JSON.stringify( {
+            amount:e.target.expense.value,
+            title:e.target.title.value,
+            tag:e.target.cat.value
+        }),{
             headers: {
                 "Authorization": "Bearer " + localStorage.getItem('token'),
               "Content-Type": "application/json",

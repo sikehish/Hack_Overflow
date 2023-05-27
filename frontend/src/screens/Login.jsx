@@ -7,7 +7,8 @@ function Login() {
     const [datal, setDatal] = React.useState({ email: '', password: '' })
 
     const handleSubmit = (e) => {
-        e.preventDefault()
+        e.preventDefault();
+
         setDatal(
             {
                 email: e.target.email.value,
