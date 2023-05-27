@@ -24,6 +24,11 @@ exports.createExpense=asyncWrapper(async (req, res)=>{
 
     title=title.trim()
     tag=tag.trim()
+
+    if(!title || !tag){
+        res.status(400)
+        throw new Error('Invalid data')
+    }
     
     if(isNaN(amount)){
         res.status(400)
@@ -37,3 +42,51 @@ exports.createExpense=asyncWrapper(async (req, res)=>{
         data
     })
 })
+
+exports.deleteExpense=asyncWrapper(async (req, res)=>{
+
+    let { id } = req.body
+
+    const data= await Expense.findByIdAndDelete(id)
+
+    if (!data) {
+        res.status(404)
+        throw new Error("Expense doesn't exist")
+     }
+ 
+
+    res.status(204).json({
+        status:'success',
+        message:'User data deleted successfully.'
+    })
+})
+
+exports.editExpense=asyncWrapper(async (req, res)=>{
+
+    let { id, title, tag, amount } = req.body
+    let uid = req.user
+
+    title= title!=undefined && title.trim()
+    tag=tag!=undefined && tag.trim()
+    
+    if(isNaN(amount)){
+        res.status(400)
+        throw new Error('Invalid amount')
+    }
+
+    const newDoc= await Expense.findByIdAndUpdate({id, title, tag, amount},{
+        new: true,
+        runValidators: true
+      })
+
+      if (!newDoc) {
+        res.status(404)
+        throw new Error("Expense doesn't exist")
+      }
+
+    res.status(200).json({
+        status:'success',
+        data: newDoc
+    })
+})
+
