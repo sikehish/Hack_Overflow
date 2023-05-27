@@ -36,6 +36,7 @@ function Charte() {
     const Display=()=>{
         return exp.map((data)=>{
             if(data.expenses>data.targetExpense){
+                // eslint-disable-next-line react/jsx-key
                 return <div>
                     <p>Your expenses in  <b>{data._id} </b> is over by {data.expenses-data.targetExpense} than your target</p>
                 </div>
