@@ -88,13 +88,15 @@ exports.editExpense=asyncWrapper(async (req, res)=>{
 
     title= title!=undefined && title.trim()
     tag=tag!=undefined && tag.trim()
+
+    console.log(req.body)
     
     if(isNaN(amount)){
         res.status(400)
         throw new Error('Invalid amount')
     }
 
-    const newDoc= await Expense.findByIdAndUpdate({id, title, tag, amount},{
+    const newDoc= await Expense.findByIdAndUpdate(id, {title, tag, amount},{
         new: true,
         runValidators: true
       })

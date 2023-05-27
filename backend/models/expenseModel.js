@@ -11,8 +11,7 @@ const expenseSchema = new mongoose.Schema({
     type: String,
     required: true,
     trim: true,
-    minlength: [3, 'Your title cannot be less than 3 characters'],
-    maxlength: [20,'Your tttle cannot exceed 20 characters']
+    minlength: [1, 'Your title cannot be less than 1 characters'],
   },
   tag: {
     type: String,
