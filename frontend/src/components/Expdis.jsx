@@ -1,6 +1,15 @@
+import { Button } from "@mui/material"
 function Expdis() {
     const exparray=[{expname:"abc",expcat:"xyz",expdate:"12/12/2020"},{expname:"abc",expcat:"xyz",expdate:"12/12/2020"},{expname:"abc",expcat:"xyz",expdate:"12/12/2020"}]
 
+
+
+    const handleclickp=()=>{
+        console.log("previous") //change the exparray to previous 3 values
+    }
+    const handelclickn=()=>{
+        console.log("next")     //change the exparray to next 3 values
+    }
 
     const Tabledata=()=>{
         return exparray.map((data)=>{
@@ -24,6 +33,8 @@ function Expdis() {
             </tr>
             <Tabledata />
         </table>
+        <Button variant="contained" color="primary" onClick={handleclickp}>Previous</Button>
+        <Button variant="contained" color="primary" onClick={handelclickn}>Next</Button>
     </div>
 }
 
