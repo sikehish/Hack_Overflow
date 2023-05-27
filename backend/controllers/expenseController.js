@@ -43,6 +43,7 @@ exports.createExpense=asyncWrapper(async (req, res)=>{
 
         console.log(req.body)
     let { title, tag, amount } = req.body
+    tag=tag.toLowerCase()
     let uid = req.user
 
     if(title!=undefined) title=title.trim()
@@ -68,11 +69,17 @@ exports.createExpense=asyncWrapper(async (req, res)=>{
     const data= await Expense.create({uid, title, tag, amount})
 
     const { tagData, budget} = await getAnalysedData(req)
-
+    
     const filteredData = tagData.find(ele => ele.name === tag.toLowerCase())
 
+    if(!filteredData){
+        res.status(404)
+        throw new Error('Invalid tag')
+    }
+    
     const { email, name } = await User.findById(req.user)
-
+    
+    console.log(filteredData)
     
     const percentage= filteredData.expenses/filteredData.targetExpense * 100
 
