@@ -26,6 +26,10 @@ app.use(checkAuth)
 app.use('/api/expenses',expenseRouter)
 app.use('/api/budget',budgetRouter)
 
+//Chat Bot integration
+
+app.post('/api/chat',)
+
 const uri=process.env.MONGO_URI.replace('<password>', process.env.MONGO_PW)
 const PORT=process.env.PORT || 3000
 
