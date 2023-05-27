@@ -15,22 +15,22 @@ export default function Home() {
 
         // eslint-disable-next-line react/jsx-key
         return (<>
-            <div style={{ "display": "flex", "justifyContent": "space-around", "margin": "4px" }}>
+            <div style={{ "display": "flex", "justifyContent": "space-around", "margin-top": "30px" }}>
                 <p style={{ "margin": "0" }}>Food </p>
                 <FastfoodIcon />
             </div>
             <TextField id="outlined-basic" label="Percentage" variant="outlined" name="Food" />
-            <div style={{ "display": "flex", "justifyContent": "space-around", "margin": "4px" }}>
+            <div style={{ "display": "flex", "justifyContent": "space-around", "margin-top": "30px" }}>
                 <p style={{ "margin": "0" }}>Travel </p>
                 <DriveEtaIcon />
             </div>
             <TextField id="outlined-basic" label="Percentage" variant="outlined" name="Travel" />
-            <div style={{ "display": "flex", "justifyContent": "space-around", "margin": "4px" }}>
+            <div style={{ "display": "flex", "justifyContent": "space-around", "margin-top": "30px" }}>
                 <p style={{ "margin": "0" }}>Shopping </p>
                 <ShoppingCartIcon />
             </div>
             <TextField id="outlined-basic" label="Percentage" variant="outlined" name="Shopping" />
-            <div style={{ "display": "flex", "justifyContent": "space-around", "margin": "4px" }}>
+            <div style={{ "display": "flex", "justifyContent": "space-around", "margin-top": "30px" }}>
                 <p style={{ "margin": "0" }}>Others </p>
                 <MoreVertIcon />
             </div>
