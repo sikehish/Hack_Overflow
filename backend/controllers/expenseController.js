@@ -112,3 +112,48 @@ exports.editExpense=asyncWrapper(async (req, res)=>{
     })
 })
 
+// Get the current date
+const currentDate = new Date();
+
+// Extract the year and month from the current date
+const currentYear = currentDate.getFullYear();
+const currentMonth = currentDate.getMonth() + 1;
+
+exports.getAnalysedData=asyncWrapper(async (req,res)=>{
+    const pipeline = [
+        {
+                $match: {
+                  $expr: {
+                    $and: [
+                      { $eq: [{ $year: '$createdAt' }, currentYear] },
+                      { $eq: [{ $month: '$createdAt' }, currentMonth] }
+                    ]
+                  }
+                }
+        },
+        {
+            $group: {
+            _id: "$tag" ,
+            expenses: {
+                $sum: "$amount",
+                
+            },
+                count:{
+                    $sum :1
+                }
+        }}
+      ];
+
+      const aggregatedData= await Expense.aggregate(pipeline)
+
+      if(!aggregatedData || !(aggregatedData.length)){
+        res.status(404)
+        throw new Error('No expenses found')
+    }
+
+      
+    res.status(200).json({
+        status:'success',
+        data: aggregatedData
+    })
+})
