@@ -17,7 +17,7 @@ import Button from '@mui/material/Button';
 import { Link } from 'react-router-dom';
 
 const drawerWidth = 240;
-const navItems = [{name:'Home',link:'/'},{name:'Login',link:'/login'},{name:'SignUp',link:'/signup'},{name:'ExpenseTracker',link:'/expense'},{name:'Insight',link:'/chart'},{name:'FinanceBot',link:'/bot'}];
+const navItems = [{name:'Home',link:'/'},{name:'Expense',link:'/expense'},{name:'Insight',link:'/chart'},{name:'FinanceBot',link:'/bot'}];
 
 function DrawerAppBar(props) {
   const { window } = props;
