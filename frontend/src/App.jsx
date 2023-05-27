@@ -4,12 +4,14 @@ import Login from './screens/Login';
 import Signup from './screens/Signup';
 import Forgot from './screens/Forgot';
 import Password from './screens/Password';
+import Home from './screens/Home';
 
 function App() {
   return (
     <>
       <Router>
         <Routes>
+          <Route path='/' element={<Home/>} />
           <Route path='/login' element={<Login/>} />
           <Route path='/signup' element={<Signup/>} />
           <Route path='/forgot' element={<Forgot/>} />
