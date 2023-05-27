@@ -42,8 +42,8 @@ exports.createExpense=asyncWrapper(async (req, res)=>{
     let { title, tag, amount } = req.body
     let uid = req.user
 
-    title= title!=undefined && title.trim()
-    tag=tag!=undefined && tag.trim()
+    if(title!=undefined) title=title.trim()
+    if(tag!=undefined)  tag=tag.trim()
 
     if(!title || !tag){
         res.status(400)
