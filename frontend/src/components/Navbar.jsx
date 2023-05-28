@@ -17,7 +17,7 @@ import { Link } from 'react-router-dom';
 
 
 const drawerWidth = 240;
-const navItems = [{name:'Home',link:'/'},{name:'Expense',link:'/expense'},{name:'Insight',link:'/chart'},{name:'FinanceBot',link:'/bot'}];
+const navItems = [{name:'Home',link:'/'},{name:'Expense',link:'/expense'},{name:'Insight',link:'/chart'},{name:'FinanceBot',link:'/bot'},{name:'Blogs',link:'/blog'}];
 
 function DrawerAppBar(props) {
   const { window } = props;

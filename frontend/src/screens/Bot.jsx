@@ -7,10 +7,12 @@ import SmartToyIcon from '@mui/icons-material/SmartToy';
 
 
 export default function Bot() {
+
+  
     return (
         <>
             <DrawerAppBar />
-            <form action="/bot" method="post">
+            <form action="/api/chat" method="post">
                 <Card sx={{ minWidth: 275 }}>
                     <CardContent>
                         <h1>Welcome to your finance chat bot </h1>
