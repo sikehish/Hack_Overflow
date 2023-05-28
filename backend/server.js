@@ -22,10 +22,9 @@ app.use(mongoSantize()) //looks at req.body and req.params and filters out '$' a
 //Data sanitization (XSS - Cross-site scripting attacks) 
 app.use(xssClean())  // protection against injection of malicious code
 
-
+var gptmsg='';
 // Chat Bot integration
 const configuration = new Configuration({
-  organization: process.env.GPT_ORG,
   apiKey: process.env.GPT_KEY,
 });
 
@@ -35,14 +34,13 @@ app.post('/api/chat',async (req,res)=>{
 
   console.log(req.body)
 
-  openai
-  .createCompletion({
+  
+  await openai.createChatCompletion({
     model: "gpt-3.5-turbo",
-    messages: [{ role: "user", content: req.body.gptqn }],
+    messages: [{ role: "user", content: "Hi" }],
   })
-  .then((res) => {
-    console.log(res)
-    res.send(res.data.choices[0].message.content);
+  .then(response=>{
+    gptmsg=response.data.choices[0].message.content;
     console.log(gptmsg);
   })
   .catch((e) => {
