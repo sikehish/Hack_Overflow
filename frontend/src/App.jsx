@@ -10,6 +10,7 @@ import Expdis from './components/Expdis';
 import Chart from './components/Chart';
 import Bot from './screens/Bot';
 import Table from './screens/Table';
+import Blog from './screens/Blog'
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
           <Route path='/expense' element={<Table/>} />
           <Route path='/chart' element={<Chart/>} />
           <Route path='/bot' element={<Bot/>} />
+          <Route path='/blog' element={<Blog/>} />
         </Routes>
       </Router>
     </>

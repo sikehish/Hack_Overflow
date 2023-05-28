@@ -15,22 +15,22 @@ export default function Home() {
 
         // eslint-disable-next-line react/jsx-key
         return (<>
-            <div style={{ "display": "flex", "justifyContent": "space-around", "margin": "4px" }}>
+            <div style={{ "display": "flex", "justifyContent": "space-around", "margin-top": "30px" }}>
                 <p style={{ "margin": "0" }}>Food </p>
                 <FastfoodIcon />
             </div>
             <TextField id="outlined-basic" label="Percentage" variant="outlined" name="Food" />
-            <div style={{ "display": "flex", "justifyContent": "space-around", "margin": "4px" }}>
+            <div style={{ "display": "flex", "justifyContent": "space-around", "margin-top": "30px" }}>
                 <p style={{ "margin": "0" }}>Travel </p>
                 <DriveEtaIcon />
             </div>
             <TextField id="outlined-basic" label="Percentage" variant="outlined" name="Travel" />
-            <div style={{ "display": "flex", "justifyContent": "space-around", "margin": "4px" }}>
+            <div style={{ "display": "flex", "justifyContent": "space-around", "margin-top": "30px" }}>
                 <p style={{ "margin": "0" }}>Shopping </p>
                 <ShoppingCartIcon />
             </div>
             <TextField id="outlined-basic" label="Percentage" variant="outlined" name="Shopping" />
-            <div style={{ "display": "flex", "justifyContent": "space-around", "margin": "4px" }}>
+            <div style={{ "display": "flex", "justifyContent": "space-around", "margin-top": "30px" }}>
                 <p style={{ "margin": "0" }}>Others </p>
                 <MoreVertIcon />
             </div>
@@ -45,26 +45,23 @@ const handelsubmit = (e) => {
     e.preventDefault()
     var data = []
     data = [{
-        category: 'Budget',
-        amount: e.target.budget.value
-    }, {
-        category: 'Food',
+        name: 'Food',
         percentage: e.target.Food.value
     },
     {
-        category: 'Travel',
+        name: 'Travel',
         percentage: e.target.Travel.value
     },
     {
-        category: 'Shopping',
+        name: 'Shopping',
         percentage: e.target.Shopping.value
     },
     {
-        category: 'Others',
+        name: 'Others',
         percentage: e.target.Others.value
     }]
     console.log(data)
-    axios.post('/api/budget', JSON.stringify(data), {
+    axios.post('/api/budget', JSON.stringify({budget:e.target.budget.value,tags:data}), {
         headers: {
             Authorization: "Bearer " + localStorage.getItem('token'),
             "Content-Type": "application/json",

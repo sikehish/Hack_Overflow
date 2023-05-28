@@ -34,13 +34,13 @@ const currentMonth = currentDate.getMonth() + 1;
       ];
 
       const aggregatedData= await Expense.aggregate(pipeline)
-      console.log(req.user)
+      console.log(aggregatedData)
 
           if(!aggregatedData ||!(aggregatedData.length)){
         res.status(404)
         throw new Error('No expenses found')
     }
-    console.log('REQUSER ' ,req.user)
+    // console.log('REQUSER ' ,req.user)
     const data= await Budget.findOne({ uid: req.user})
     const { tags, budget } = data
     console.log(data)

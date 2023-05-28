@@ -16,7 +16,7 @@ function Expense() {
     const [datal,setDatal]=React.useState({})
 
     const handleSubmit=(e)=>{
-        e.preventDefault()
+        // e.preventDefault()
         setDatal(
             {
                 amount:e.target.expense.value,

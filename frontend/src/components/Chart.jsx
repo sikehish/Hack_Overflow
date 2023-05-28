@@ -16,13 +16,12 @@ function Charte() {
             },
         })
             .then((res) => {
-                if (res.data.status === 'success') {
-                    setExp(res.data.data)
+                console.log(res)
+                setExp(res.data.data)
                     let temp = res.data.data.map((data) => {
                         return ([data._id, data.expenses])
                     })
                     setData([["Task", "Amount"], ...temp])
-                }
                 // else {
                 //     console.log('res.data.message')
                 //     window.location.href = '/chart'
@@ -41,7 +40,6 @@ function Charte() {
             .then((res) => {
                 if (res.data.status === 'success') {
                     setExp2(res.data.data[0].expenses)
-                    console.log(res.data.data[0].expenses)
                 }
                 // else {
                 //     console.log('res.data.message')
@@ -55,16 +53,18 @@ function Charte() {
 
     const Display = () => {
         return exp.map((data) => {
+            if(data.count){
             if (data.expenses > data.targetExpense) {
                 return <div style={{"color":"red"}}>
-                    <p>Your expenses in  <b>{data._id} </b> is over by {data.expenses - data.targetExpense} than your target</p>
+                    <p>Your expenses in  <b>{data._id} </b> is over by {data.expenses - data.targetExpense} ₹ than your target</p>
                 </div>
             }
             else {
-                return <div>
-                    <p>Your expenses in  <b>{data._id} </b> is less than the target by {data.expenses - data.targetExpense}</p>
+                return <div style={{"color":"green"}}>
+                    <p>Your expenses in  <b>{data._id} </b> is less than the target by {data.expenses - data.targetExpense} ₹</p>
                 </div>
             }
+        }
         })
     }
 

@@ -11,7 +11,28 @@ function Expdis() {
         console.log("next")     //change the exparray to next 3 values
     }
 
-
+    const handleSubmit = (e) => {
+        // e.preventDefault()
+        console.log(e.target.isid.value)
+        axios.delete(`/api/expenses/${e.target.isid.value}`,{
+            headers: {
+                "Authorization": "Bearer " + localStorage.getItem('token'),
+              "Content-Type": "application/json",
+            },
+          }
+        )
+        .then((res)=>{
+            if(res.data.status==='success'){
+                window.location.href='/expense'
+            }
+            else if(res.data.status==="Invalid data"){
+                alert(res.data.message)
+            }
+        })
+        .catch((err)=>{
+            console.log(err)
+        })
+    }
     useEffect(() => {
         axios.get('/api/expenses', {
             headers: {
@@ -36,20 +57,23 @@ function Expdis() {
     const Tabledata = () => {
         return exp.map((data) => {
             // eslint-disable-next-line react/jsx-key
-            return (<div>
+            return (<div style={{"display":"flex"}}>
                 <tr>
                     {/* <td style={{"width":"200px"}}>{data.amount}</td>
                     <td style={{"width":"200px"}}>{data.title}</td>
                     <td style={{"width":"200px"}}>{data.tag}</td>
                     <td style={{"width":"200px"}}>{data.date}</td> */}
-                    <div style={{"display":"flex","justifyContent":"stretch"}}>
+                    <div style={{"display":"flex","justifyContent":"stretch","border":"2px solid","margin":"10px","padding":"10px"}}>
                             <p style={{"width":"200px"}}>{data.amount}</p>
                             <p style={{"width":"200px"}}>{data.title}</p> 
                             <p style={{"width":"200px"}}>{data.tag}</p>
-                            <p style={{"width":"200px"}}>{data.createdAt}</p>
+                            <p style={{"width":"200px"}}>{data.createdAt.substring(0,10)}</p>
                     </div>
 
                 </tr>
+                <form onSubmit={handleSubmit}>
+                <Button variant="contained" color="primary" type='submit' name='isid' value={data._id} style={{"margin":"20px"}}>Delete</Button>
+                </form>
             </div>)
         })
 
