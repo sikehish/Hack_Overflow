@@ -11,7 +11,28 @@ function Expdis() {
         console.log("next")     //change the exparray to next 3 values
     }
 
-
+    const handleSubmit = (e) => {
+        // e.preventDefault()
+        console.log(e.target.isid.value)
+        axios.delete(`/api/expenses/${e.target.isid.value}`,{
+            headers: {
+                "Authorization": "Bearer " + localStorage.getItem('token'),
+              "Content-Type": "application/json",
+            },
+          }
+        )
+        .then((res)=>{
+            if(res.data.status==='success'){
+                window.location.href='/expense'
+            }
+            else if(res.data.status==="Invalid data"){
+                alert(res.data.message)
+            }
+        })
+        .catch((err)=>{
+            console.log(err)
+        })
+    }
     useEffect(() => {
         axios.get('/api/expenses', {
             headers: {
@@ -50,6 +71,9 @@ function Expdis() {
                     </div>
 
                 </tr>
+                <form onSubmit={handleSubmit}>
+                <Button variant="contained" color="primary" type='submit' name='isid' value={data._id}>Delete</Button>
+                </form>
             </div>)
         })
 
