@@ -46,7 +46,7 @@ function Expdis() {
                     setExp(res.data.data[0].expenses)
                 }
                 else {
-                    console.log('res.data.message')
+                    alert('res.data.message')
                     window.location.href = '/expdis'
                 }
             })
