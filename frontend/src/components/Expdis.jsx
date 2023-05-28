@@ -57,22 +57,22 @@ function Expdis() {
     const Tabledata = () => {
         return exp.map((data) => {
             // eslint-disable-next-line react/jsx-key
-            return (<div>
+            return (<div style={{"display":"flex"}}>
                 <tr>
                     {/* <td style={{"width":"200px"}}>{data.amount}</td>
                     <td style={{"width":"200px"}}>{data.title}</td>
                     <td style={{"width":"200px"}}>{data.tag}</td>
                     <td style={{"width":"200px"}}>{data.date}</td> */}
-                    <div style={{"display":"flex","justifyContent":"stretch"}}>
+                    <div style={{"display":"flex","justifyContent":"stretch","border":"2px solid","margin":"10px","padding":"10px"}}>
                             <p style={{"width":"200px"}}>{data.amount}</p>
                             <p style={{"width":"200px"}}>{data.title}</p> 
                             <p style={{"width":"200px"}}>{data.tag}</p>
-                            <p style={{"width":"200px"}}>{data.createdAt}</p>
+                            <p style={{"width":"200px"}}>{data.createdAt.substring(0,10)}</p>
                     </div>
 
                 </tr>
                 <form onSubmit={handleSubmit}>
-                <Button variant="contained" color="primary" type='submit' name='isid' value={data._id}>Delete</Button>
+                <Button variant="contained" color="primary" type='submit' name='isid' value={data._id} style={{"margin":"20px"}}>Delete</Button>
                 </form>
             </div>)
         })
