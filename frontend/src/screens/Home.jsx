@@ -45,26 +45,23 @@ const handelsubmit = (e) => {
     e.preventDefault()
     var data = []
     data = [{
-        category: 'Budget',
-        amount: e.target.budget.value
-    }, {
-        category: 'Food',
+        name: 'Food',
         percentage: e.target.Food.value
     },
     {
-        category: 'Travel',
+        name: 'Travel',
         percentage: e.target.Travel.value
     },
     {
-        category: 'Shopping',
+        name: 'Shopping',
         percentage: e.target.Shopping.value
     },
     {
-        category: 'Others',
+        name: 'Others',
         percentage: e.target.Others.value
     }]
     console.log(data)
-    axios.post('/api/budget', JSON.stringify(data), {
+    axios.post('/api/budget', JSON.stringify({budget:e.target.budget.value,tags:data}), {
         headers: {
             Authorization: "Bearer " + localStorage.getItem('token'),
             "Content-Type": "application/json",

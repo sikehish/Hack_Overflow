@@ -43,7 +43,7 @@ const currentMonth = currentDate.getMonth() + 1;
     // console.log('REQUSER ' ,req.user)
     const data= await Budget.findOne({ uid: req.user})
     const { tags, budget } = data
-    // console.log(data)
+    console.log(data)
       const tagData=tags.map((ele, i)=>{
           return {...aggregatedData[i],
             name: ele.name.toLowerCase(),
