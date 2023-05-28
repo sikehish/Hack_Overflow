@@ -42,10 +42,10 @@ const blogs =[{
       <Typography variant="h4" component="h1" gutterBottom>
         {post.title}
       </Typography>
-      <Grid container spacing={2} style={{"textAlign":"center","display":"flex","justifyContent":"center","margin":"40px 0"}}>
+      <Grid container spacing={3} style={{"textAlign":"center","display":"flex","justifyContent":"center","margin":"40px 0"}}>
           <Grid item key={post.id} xs={12} sm={6} md={4}>
-            <Card>
-              <CardMedia
+            <Card >
+              <CardMedia style={{"color":"red"}}
                 title={post.title}
               />
               <CardContent >
