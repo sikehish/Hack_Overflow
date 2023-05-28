@@ -5,6 +5,7 @@ import axios from 'axios';
 import React from 'react';
 function Login() {
     const [datal, setDatal] = React.useState({ email: '', password: '' })
+    const [error, setError] = React.useState('')
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -31,7 +32,8 @@ function Login() {
                 }
             })
             .catch((err) => {
-                console.log(err)
+                console.log(err.response.data.message)
+                setError(err.response.data.message)
             })
     }
 
@@ -58,8 +60,9 @@ function Login() {
                 </form>
                 <Link to='/signup'><Button variant="contained" color="primary">Signup</Button></Link>
                 <form>
-                    <Button style={{"fontSize":"9px"}} variant="text" >Forget password</Button>
+                    <Button style={{"fontSize":"9px"}} variant="text" >Forgot password</Button>
                 </form>
+                {error && <p style={{"color":"red"}}>{error}</p>}
             </div>
         
         </div>
