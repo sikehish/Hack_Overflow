@@ -7,7 +7,7 @@ import React from 'react';
 
 function Signup() {
     const [data, setData] = React.useState({ name: '', email: '', password: '', confirmPassword: '' })
-
+    const [error, setError] = React.useState('')
     // useEffect(()=>{
     //     axios.post('/api/users/signup',data)
     // },[])
@@ -37,7 +37,8 @@ function Signup() {
                 }
             })
             .catch((err) => {
-                console.log(err)
+                console.log(err.response.data.message)
+                setError(err.response.data.message)
             })
     }
 
@@ -67,6 +68,7 @@ function Signup() {
                         </ul>
                     </form>
                     <Link to='/login'><Button variant="contained" color="primary">Login</Button></Link>
+                    {error && <p style={{"color":"red"}}>{error}</p>}
                 </div>
 
             </div>
