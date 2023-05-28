@@ -14,9 +14,7 @@ exports.checkAuth = (req, res, next) => {
     }
   
     try {
-        const { id } = jwt.verify(token, process.env.JWT_KEY);
-        console.log(token, process.env.JWT_KEY)
-
+      const { id } = jwt.verify(token, process.env.JWT_KEY);
         if (!id) return res.status(401).json({ status:"fail",message: "User doesn't exist" });
 
         req.user = id;

@@ -60,7 +60,7 @@ exports.passwordReset = async (uid, token, password, confirmPassword) => {
   confirmPassword=confirmPassword.trim()
   if(!password || !confirmPassword) throw new Error("Passwords cannot be empty");
   if (password !== confirmPassword) throw Error("Passwords not matching")
-  if(!validator.isStrongPassword(password)) throw new Error('Password not strong enough!')
+ // if(!validator.isStrongPassword(password)) throw new Error('Password not strong enough!')
 
   const hashedPassword = await bcrypt.hash(password, 10);
 
