@@ -50,16 +50,19 @@ function Charte() {
                 console.log(err)
             })
     }, [])
-
+    let temp1=0;
+    let temp2=0;
     const Display = () => {
         return exp.map((data) => {
             if(data.count){
             if (data.expenses > data.targetExpense) {
+                temp1=temp1+1;
                 return <div style={{"color":"red"}}>
                     <p>Your expenses in  <b>{data._id} </b> is over by {data.expenses - data.targetExpense} ₹ than your target</p>
                 </div>
             }
             else {
+                temp2=temp2+1;
                 return <div style={{"color":"green"}}>
                     <p>Your expenses in  <b>{data._id} </b> is less than the target by {data.expenses - data.targetExpense} ₹</p>
                 </div>
@@ -68,12 +71,25 @@ function Charte() {
         })
     }
 
+    const Display2= () => {
+        if(temp1>temp2){
+            return <div style={{"color":"red"}}>
+                <p>You have to plan your budget properly !</p>
+            </div>
+        }
+        else{
+            return <div style={{"color":"green"}}>
+                <p>I admire your financial discipline. You have always been able to make wise financial decisions, even when it was difficult.</p>
+            </div>
+        }
+    }
     
 
 
     return (
         <>
             <DrawerAppBar />
+            <div style={{ "display": "flex", "justifyContent": "space-around", "margin-top": "30px" }}>
             <Chart
                 chartType="PieChart"
                 data={data}
@@ -82,13 +98,14 @@ function Charte() {
                 legendToggle
             />
             <Chart
-                chartType="Line"
+                chartType="BarChart"
                 width="100%"
                 height="400px"
                 data={data}
             />
+            </div>
             <Display />
-            <p>I admire your financial discipline. You have always been able to make wise financial decisions, even when it was difficult.</p>
+            <Display2 />
         </>
 
     )
