@@ -17,6 +17,7 @@ exports.createBudget=asyncWrapper(async(req,res)=>{
 })
 
 exports.getBudget=asyncWrapper(async(req,res)=>{
+  console.log(req.user)
     const data=await Budget.find({uid:req.user});
 
       if(data<0 || !data || !(data.length)){
